@@ -41,7 +41,10 @@ public class MembroServico {
     }
 
     public AtualizarDto atualizarMembros(AtualizarDto atualizarDto){
-        var membro = modelMapper.map(atualizarDto, Membro.class);
+        if (atualizarDto.getId() == null) {
+            throw new IllegalArgumentException("ID não pode ser nulo para atualização");
+        }
+        var membro =modelMapper.map(atualizarDto, Membro.class);
         var membroAtualizado = membroRepositorio.save(membro);
         return modelMapper.map(membroAtualizado, AtualizarDto.class);
 

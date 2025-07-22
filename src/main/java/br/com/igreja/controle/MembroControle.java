@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/membros")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins ="*" )
 public class MembroControle {
 
     private final MembroServico membroServico;
@@ -39,7 +39,7 @@ public class MembroControle {
     }
 
     @PutMapping
-    public ResponseEntity<AtualizarDto>atualizarMembro(@RequestBody AtualizarDto atualizarDto){
+    public ResponseEntity<AtualizarDto>atualizarMembro( @RequestBody AtualizarDto atualizarDto){
         var atualizar = membroServico.atualizarMembros(atualizarDto);
         return ResponseEntity.status(HttpStatus.OK).body(atualizar);
 

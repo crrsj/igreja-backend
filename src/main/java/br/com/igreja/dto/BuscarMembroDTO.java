@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class BuscarMembroDTO {
     private Long id;
     private String nome;
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd/MM/yyyy")
+  //  @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
     private Genero genero;
     private String telefone;

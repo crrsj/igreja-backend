@@ -1,5 +1,7 @@
 package br.com.igreja.servico;
 
+import br.com.igreja.dto.AtualizarEventoDTO;
+import br.com.igreja.dto.BuscaEventoDTO;
 import br.com.igreja.dto.BuscarEventosDTO;
 import br.com.igreja.dto.EventoDTO;
 import br.com.igreja.entidade.Evento;
@@ -27,5 +29,20 @@ public class EventoServico {
         return eventoRepositorio
                 .findAll().stream().map(buscar -> modelMapper.map(buscar,
                  BuscarEventosDTO.class)).toList();
+    }
+
+    public BuscaEventoDTO buscarEventoPorId(Long id){
+        var evento = eventoRepositorio.findById(id).orElseThrow();
+        return modelMapper.map(evento, BuscaEventoDTO.class);
+    }
+
+    public AtualizarEventoDTO atualizarEvento(AtualizarEventoDTO atualizarEventoDTO){
+        var atualizar = modelMapper.map(atualizarEventoDTO,Evento.class);
+        var atualizarEvento = eventoRepositorio.save(atualizar);
+        return modelMapper.map(atualizarEvento, AtualizarEventoDTO.class);
+    }
+
+    public void excluirEvento(Long id){
+        eventoRepositorio.deleteById(id);
     }
 }

@@ -1,8 +1,6 @@
 package br.com.igreja.controle;
 
-import br.com.igreja.dto.BuscarEventosDTO;
-import br.com.igreja.dto.BuscarMembrosDTO;
-import br.com.igreja.dto.EventoDTO;
+import br.com.igreja.dto.*;
 import br.com.igreja.servico.EventoServico;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -34,5 +32,23 @@ public class EventoControle {
     public ResponseEntity<List<BuscarEventosDTO>>buscarEventos(){
         var buscar = eventoServico.buscarEventos();
         return ResponseEntity.ok(buscar);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BuscaEventoDTO>buscarEventoPorId(@PathVariable Long id){
+        var busca = eventoServico.buscarEventoPorId(id);
+        return ResponseEntity.ok().body(busca);
+    }
+
+    @PutMapping
+    public ResponseEntity<AtualizarEventoDTO>atualizarEvento(@RequestBody AtualizarEventoDTO atualizarEventoDTO){
+        var atualizar = eventoServico.atualizarEvento(atualizarEventoDTO);
+        return ResponseEntity.ok().body(atualizar);
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void>excluirEvento(@PathVariable Long id){
+        eventoServico.excluirEvento(id);
+        return ResponseEntity.noContent().build();
     }
 }
